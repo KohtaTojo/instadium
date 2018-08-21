@@ -1,0 +1,23 @@
+%main.d-flex.justify-content-center.align-items-center
+  .clean-block.user-new{style: "height: 600px;"}
+    .container.justify-content-center.d-flex
+      .row
+        .user-block.block-content.bg-white.col-md-12.mb-3
+          .text-center.m-3{style: "font-size: 45px"} Instadium
+          = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+            = devise_error_messages!
+            .form-group{ style: "padding-bottom: 30px;"}
+              .field.mb-3
+                = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control bg-light", placeholder: "メールアドレス"
+              .field.mb-3
+                = f.password_field :password, autocomplete: "off", class: "form-control bg-light", placeholder: "パスワード"
+              - if devise_mapping.rememberable?
+                .field
+                  = f.check_box :remember_me
+                  = f.label :remember_me
+            .actions
+              = f.submit "Log in", class: "form-group btn btn-primary btn-block"
+        .user-block.block-content.bg-white.col-md-12
+          %p.text-center.m-3
+            アカウントをお持ちでないですか？
+            = render "devise/shared/links"

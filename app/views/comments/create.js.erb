@@ -1,0 +1,3 @@
+$("<%= @comment_block %>").append("<div class='comment-block'><%= @comment.user.username%> <%= @comment.content %></div>");
+$("<%= @comment_block_2 %>").append("<div class='comment-block'><%= @comment.user.username%> <%= @comment.content %></div>");
+$("#new_comment input").val('');

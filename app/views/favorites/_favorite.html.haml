@@ -1,0 +1,6 @@
+- if pic.favorite_user(current_user.id)
+  = link_to picture_favorite_path(id: pic.favorite_user(current_user.id).id, picture_id: pic.id), method: :delete, id: "like-buttons-#{number}-#{pic.id}", remote: true do
+    = fa_icon "heart", :class => "text-danger"
+- else
+  = link_to picture_favorites_path(pic), method: :post, id: "like-buttons-#{number}-#{pic.id}", remote: true do
+    = fa_icon "heart-o", :class => "text-muted"

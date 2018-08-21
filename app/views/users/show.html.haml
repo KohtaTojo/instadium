@@ -1,0 +1,44 @@
+%main.page
+  .clean-block.user-show
+    .container
+      .top-block.mb-5
+        .row
+          .top-block-left.col-md-4.d-flex
+            - if @user.avatar.url
+              = image_tag @user.avatar.url, class: "user-show-avatar mx-auto"
+            - else
+              = fa_icon "user", class: "user-show-avatar mx-auto"
+          .top-block-right.col-md-8
+            .top-content.d-flex
+              .username.mr-3{style: "font-size:55px;font-weight:200;"}
+                = @user.username
+              - if @user.id == current_user.id
+                .edit.align-self-center.justify-content-center.mr-3
+                  = link_to "プロフィールを編集", edit_user_registration_path, class: "text-dark font-weight-bold h5 border p-2"
+                .edit-icon.align-self-center
+                  = link_to "ログアウト", destroy_user_session_path, class: "text-dark font-weight-bold h5 border p-2", method: :delete
+            .center.d-flex.my-3{style: "font-size:22px;"}
+              .picture.mr-5
+                投稿
+                = @user.pictures.count
+              .favorited-count.mr-5
+                いいね獲得数
+                = @favorited_count
+            .bottom.font-weight-bold.h4
+              = @user.username
+      %ul.nav.nav-tabs
+        %li.nav-item.col
+          %a.nav-link.active{"data-toggle" => "tab", :href => "#tab-1", :role => "tab"}
+            投稿一覧
+        %li.nav-item.col
+          %a.nav-link{"data-toggle" => "tab", :href => "#tab-2", :role => "tab"}
+            いいね一覧
+      .tab-content.my-4
+        #tab-1.tab-pane.border-top.active{:role => "tabpanel"}
+          .row
+            - @user.pictures.each_with_index do |pic, index|
+              = render 'pictures/user-show-picture', pic: pic, index: index
+        #tab-2.tab-pane.border-top{:role => "tabpanel"}
+          .row
+            - @favopics.each_with_index do |favopic, index|
+              = render 'pictures/user-show-picture', pic: favopic.picture, index: index

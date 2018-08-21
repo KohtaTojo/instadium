@@ -1,0 +1,39 @@
+%main.page.landing-page.bg-light
+  %section.block-content
+    .container
+      .row
+        - @pictures.each_with_index do |pic, index|
+          - if index == 0
+            = render "pictures/picture-block", pic: pic, index: index
+            %section.side-bar.block-content.hidden-sm.col-lg-4.hidden-md
+              .container
+                .current-user-block.d-flex.border-bottom
+                  .side-bar-avatar
+                    = link_to user_path(current_user.id) do
+                      - if current_user.avatar.present?
+                        = image_tag current_user.avatar.url, class: "side-bar-avatar m-2"
+                      - else
+                        = fa_icon "user", class: "side-bar-avatar text-muted"
+                  .user-name.align-self-center.font-weight-bold
+                    = link_to user_path(current_user.id), class: "text-dark" do
+                      = current_user.username
+                .follow-user-block.py-3
+                  .top-text-content.clearfix
+                    .text-muted.font-weight-bold.float-left
+                      ユーザー一覧
+                    .font-weight-bold.float-right.text-primary
+                      = link_to "すべて見る", root_path, :style => "color: #262626;"
+                  .bottom-user-content{style: "height: 400px;overflow: scroll;"}
+                    - @users.each do |user|
+                      .current-user-block.d-flex
+                        .side-bar-avatar
+                          = link_to user_path(user.id) do
+                            - if user.avatar.present?
+                              = image_tag user.avatar.url, class: "side-bar-avatar m-2"
+                            - else
+                              = fa_icon "user", class: ".side-bar-avatar text-muted"
+                        .user-name.align-self-center.font-weight-bold
+                          = link_to user_path(user.id) , class: "text-dark" do
+                            = user.username
+          - else
+            = render "pictures/picture-block", pic: pic, index: index

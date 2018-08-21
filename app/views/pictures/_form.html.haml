@@ -1,0 +1,21 @@
+= nested_form_for @picture, local: true, url: choose_new_or_edit do |form|
+  - if @picture.errors.any?
+    #error_explanation
+      %h2
+        = @picture.errors.count
+        件のエラーがあります。
+      %ul
+        - @picture.errors.full_messages.each do |msg|
+          %li
+            = msg
+  %form.block-content
+    .form-group{style: "padding-bottom:50px;"}
+      = form.label :content, "内容"
+      = form.text_area :content, class: "form-control"
+      = form.label :thumbnails, "画像"
+      = form.fields_for :thumbnails do |thumbnail|
+        = thumbnail.file_field :image, class: "form-control"
+        = thumbnail.hidden_field :image_cache, class: "form-control"
+        = thumbnail.link_to_remove "画像ファイルを削除する"
+      = form.link_to_add "画像を増やす", :thumbnails
+    = form.submit "投稿", class:"form-group btn btn-primary btn-block"

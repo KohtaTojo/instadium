@@ -1,0 +1,26 @@
+%main.page
+  .clean-block.picture-new
+    .container
+      .block-heading
+        %h2.text-info
+          ピック編集画面
+        = render 'pictures/form'
+      / = form_with(model: @picture, local: true, url: pictures_path) do |form|
+      /   - if @picture.errors.any?
+      /     #error_explanation
+      /       %h2
+      /         = @picture.errors.count
+      /         件のエラーがあります。
+      /       %ul
+      /         - @picture.errors.full_messages.each do |msg|
+      /           %li
+      /             = msg
+      /   %form.block-content
+      /     .form-group{style: "padding-bottom:50px;"}
+      /       = form.label :content, "内容"
+      /       = form.text_field :content, class: "form-control"
+      /       = form.label :thumbnails, "画像"
+      /       %p 5枚まで保存できます
+      /       = form.fields_for :thumbnails do |thumbnail|
+      /         = thumbnail.file_field :image, class: "form-control"
+      /     = form.submit "投稿", class:"form-group btn btn-primary btn-block"

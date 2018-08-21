@@ -1,0 +1,61 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Instadium
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  %body.bg-light
+    - if user_signed_in?
+      %nav.navbar.navbar-light.navbar-expand-lg.fixed-top.bg-white.clean-navbar{style: "padding: 15px;font-size: 22px;"}
+        .container
+          .row{style: "width: 100%;"}
+            .left-block.text-left.col-md-4.col-sm-6.col-6
+              = link_to root_path, class: "navbar-brand logo d-flex" do
+                = fa_icon "instagram", class: "align-self-center instalogo fa-2x"
+                .text.font-weight-bold{:style => "padding-left: 15px;font-size: 30px;"}
+                  Instadium
+            .center-block.d-flex.justify-content-center.align-self-center.col-md-4.hidden-sm.col-6
+            .right-block.col.align-self-center.col-md-4.col-sm-6
+              .logo-block.justify-content-between.d-flex{:style => "padding-left: 25px;"}
+                = link_to favorites_index_path do
+                  = fa_icon "heart-o lg", class: "text-muted"
+                = link_to user_path(current_user.id) do
+                  = fa_icon "user-o lg", class: "text-muted"
+                = link_to new_picture_path do
+                  = fa_icon "instagram lg", class: "text-muted"
+    - else
+    - flash.each do |key, value|
+      - key = "info" if key == "notice"
+      - key = "danger" if key == "alert"
+      = content_tag :div, value, class: "alert alert-#{key}"
+    = yield
+    .footer
+      .container
+        .row
+          .item
+            INSTADIUMについて
+          .item
+            サポート
+          .item
+            プレス
+          .item
+            API
+          .item
+            求人
+          .item
+            プライバシー
+          .item
+            利用規約
+          .item
+            ディレクトリ
+          .item
+            プロフィール
+          .item
+            ハッシュタグ
+          .item
+            言語
+          .col-sm-12.text-center
+            ©︎2018 INSTADIUM

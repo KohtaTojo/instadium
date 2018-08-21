@@ -1,0 +1,61 @@
+.pictures-block.col-md-12.col-sm-12.bg-white.col-lg-8.mb-5
+  .top-content.clearfix.d-flex{style: "height: 100px;padding: 10px;font-weight: bold;"}
+    .top-left-block.float-left.align-self-center.d-flex
+      .avatar
+        - if pic.user.avatar.present?
+          = image_tag pic.user.avatar.url, class: "avatar m-2"
+        - else
+          = fa_icon "user", class: "avatar text-muted"
+      .user-name.align-self-center
+        = link_to "#{pic.user.username}", user_path(pic.user.id), class: "font-weight-bold text-dark"
+    .top-right-block.float-right.align-self-center.ml-auto
+      - if current_user.id == pic.user.id
+        = link_to "編集", edit_picture_path(pic.id)
+        = link_to "削除", picture_path(pic.id), method: :delete
+  .center-carousel-block.position-relative
+    %a.pic.center-block.carousel.slide{href: picture_path(pic.id),"data-ride"=>"carousel", "data-interval"=> "false", style: "min-height: 500px;", id: "carouselExampleIndicators-#{index}"}
+      %ol.carousel-indicators
+        - pic.thumbnails.each_with_index do |thumb, index|
+          - if index == 0
+            %li.active{"data-slide-to" => "#{index}", "data-target" => "#carouselExampleIndicators-#{index}"}
+          - else
+            %li{"data-slide-to" => "#{index}", "data-target" => "#carouselExampleIndicators-#{index}"}
+      .carousel-inner
+        - pic.thumbnails.each_with_index do |thumb, index|
+          - if index == 0
+            .carousel-item.active
+              = image_tag thumb.image.url, :class => "d-block w-100", :alt => "First slide", :src => "..."
+          -else
+            .carousel-item
+              = image_tag thumb.image.url, :class => "d-block w-100", :alt => "First slide", :src => "..."
+      %a.carousel-control-prev{"data-slide" => "prev", :href => "#carouselExampleIndicators-#{index}", :role => "button"}
+        %span.carousel-control-prev-icon{"aria-hidden" => "true"}
+        %span.sr-only Previous
+      %a.carousel-control-next{"data-slide" => "next", :href => "#carouselExampleIndicators-#{index}", :role => "button"}
+        %span.carousel-control-next-icon{"aria-hidden" => "true"}
+        %span.sr-only Next
+  .bottom-block{sytle: "padding: 10px;"}
+    .bottom-top.clearfix{style: "font-size: 30px;"}
+      .float-left.d-flex
+        .image-block.align-self-center
+          = render "favorites/favorite", pic: pic, number: 1
+        .border-0.ml-3.align-self-center.pb-1
+          = link_to root_path do
+            = fa_icon "comment", class: "text-muted"
+      .float-right
+        = fa_icon "bookmark", class: "icon text-muted"
+    = render "favorites/favorite-count", pic: pic
+    .bottom
+    .bottom-bottom.d-flex
+      .username.pr-2.d-inline-block
+        = link_to "#{pic.user.username}", user_path(pic.user.id), class: "font-weight-bold text-dark"
+        = simple_format(pic.content, {}, wrapper_tag: "span")
+    .bottom-comment.mt-2.text-muted{:id => "comment-block-#{pic.id}"}
+      - pic.comments.order(id: "DESC").limit(2).reverse.each do |comment|
+        .comment-block
+          = comment.user.username
+          = comment.content
+  .comment-block.border-top.d-flex.mt-3{style: "height: 80px;"}
+    .form.align-serlf-center{style: "width: 100%;"}
+      = form_for @comment ,remote: true, url: picture_comments_path(picture_id: pic.id) do |f|
+        = f.text_field :content, class: 'form__comment align-self-center border-0', placeholder: 'コメントを追加', style: "width: 100%;height: 50px;"

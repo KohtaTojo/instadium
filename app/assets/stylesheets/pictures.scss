@@ -1,0 +1,147 @@
+@media only screen and (max-width: 720px) {
+  .hidden-sm { display: none !important; }
+}
+@media only screen and (min-width: 750px) {
+  .hidden-sm-up { display: none !important}
+}
+
+@media(max-width: 1000px) {
+  .hidden-md {
+    display: none !important;
+  }
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+main {
+  flex: 1;
+}
+
+.footer {
+  .container{
+    margin: 0 auto;
+    .row{
+      margin: 0 auto;
+      .item {
+        margin-right: 8px;
+      }
+    }
+  }
+}
+
+.instalogo {
+  padding-right: 15px;
+  border-right: solid;
+  border-width: 1px;
+}
+
+.swiper-slide {
+  height: 700px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.swiper-button-next,.swiper-button-prev {
+  width: 50px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+@media(max-width: 767px) {
+  .swiper-button-next,.swiper-button-prev {
+    display: none;
+  }
+  .swiper-slide {
+    height: 500px;
+  }
+}
+
+.icon {
+}
+
+.page {
+  padding-top: 180px;
+}
+
+.side-bar{/*サイドバー全体の箱*/
+  display: -webkit-flex;
+  display: flex;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 100px;
+}
+
+.carousel .carousel-item {
+  height: 100%;
+}
+
+.carousel img {
+  position: absolute;
+  width: 100%;
+
+}
+
+.carousel{
+  height: 200px;
+  margin:auto;
+}
+
+/* 中略（ここに上で書いてるCSSが入っている） */
+
+@media (min-width: 320px) {
+  .carousel,
+  .carousel .carousel-item,
+  .carousel .item-mask,
+  .carousel-inner .item .item-mask img {
+    height:550px;
+  }
+}
+
+@media (min-width: 768px) {
+  .carousel,
+  .carousel .carousel-item,
+  .carousel .item-mask,
+  .carousel-inner .item .item-mask img {
+    height:700px;
+  }
+}
+
+@media (min-width: 320px) {
+  .picture-show .carousel,
+  .picture-show .carousel .carousel-item,
+  .picture-show .carousel .item-mask,
+  .picture-show .carousel-inner .item .item-mask img {
+    height:500px;
+  }
+}
+
+@media (min-width: 320px) {
+  .user-show .carousel,
+  .user-show .carousel .carousel-item,
+  .user-show .carousel .item-mask,
+  .user-show .carousel-inner .item .item-mask img {
+    height:250px;
+  }
+}
+
+@media (min-width: 760px) {
+  .user-show .carousel,
+  .user-show .carousel .carousel-item,
+  .user-show .carousel .item-mask,
+  .user-show .carousel-inner .item .item-mask img {
+    height:350px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .user-show .carousel,
+  .user-show .carousel .carousel-item,
+  .user-show .carousel .item-mask,
+  .user-show .carousel-inner .item .item-mask img {
+    height:500px;
+  }
+}

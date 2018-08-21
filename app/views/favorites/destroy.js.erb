@@ -1,0 +1,4 @@
+$("<%= @like_buttons_1 %>").html("<%= j(render partial: 'favorite', locals: { pic: @picture, favorite: @favorite, number: 1}) %>");
+$("<%= @like_buttons_2 %>").html("<%= j(render partial: 'favorite', locals: { pic: @picture, favorite: @favorite, number: 2}) %>");
+$("<%= @favorite_count %>").html("<%= j(render partial: 'favorite-count', locals: { pic: @picture}) %>");
+

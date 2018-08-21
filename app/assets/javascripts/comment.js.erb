@@ -1,0 +1,35 @@
+// $(document).on('turbolinks:load', function() {
+//   function buildHTML(comment){
+//     var html = `<div class="comment-block">
+//                   aaaaaaaaaaaaaa
+//                 </div>`
+//     return html;
+//   }
+
+//   $(<%= @comment_data %>).on('submit', function(e){
+//     e.preventDefault();
+//     var formData = new FormData(this);
+//     var url = $(this).attr('action');
+//     console.log(url);
+//     console.log(formData);
+//     $.ajax({
+//       url: url,
+//       type: "post",
+//       data: formData,
+//       dataType: 'json',
+//       processData: false,
+//       contentType: false,
+//     })
+//     .done(function(data){
+//       var html = buildHTML(data);
+//       console.log
+//       $('.bottom-comment').append(html)
+//       $('.form__comment').val('')
+//       $('.form__submit').prop("disabled", false)
+//       $(".messages").scrollTop($(".messages")[0].scrollHeight);
+//     })
+//     .fail(function(){
+//       alert('error');
+//     })
+//   })
+// });
