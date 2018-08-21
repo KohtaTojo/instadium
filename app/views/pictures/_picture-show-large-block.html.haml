@@ -24,9 +24,9 @@
   .top-block.d-flex
     .avatar
       - if @picture.user.avatar.present?
-        = image_tag @picture.user.avatar.url
+        = image_tag @picture.user.avatar.url, class: "avatar"
       - else
-        = fa_icon "user"
+        = fa_icon "user", class: "avatar"
     .username.d-flex
       .align-self-center.font-weight-bold
         = @picture.user.username
